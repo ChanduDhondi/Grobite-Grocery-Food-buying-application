@@ -12,7 +12,7 @@ function Deals({ h1, p, bg, img, btn, btnBg, btnCol }) {
         <p className="mt-[2rem] mb-[1rem]">{p}</p>
         <Link to="/shop">
           <button
-            className="p-[1rem] rounded-[20px] mt-[1rem]"
+            className="p-[1rem] rounded-[20px] mt-[1rem] mb-[1rem]"
             style={{
               backgroundColor: `${btnBg}`,
               color: `${btnCol}`,

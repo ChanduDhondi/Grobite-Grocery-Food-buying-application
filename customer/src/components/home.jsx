@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import "../style.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import cart from "../../Home icons/li_shopping-cart.png";
 import deals1 from "../../Home icons/deals1.png";
 import deals2 from "../../Home icons/deals2.png";
 import deals3 from "../../Home icons/deals3.png";
 import Deals from "./deals";
+import Items from "./items";
 
 function Home() {
   const [category, setCategory] = useState([]);
@@ -91,35 +91,7 @@ function Home() {
       <section className="layout ">
         <div className="bg-[rgba(245,245,245,1)] p-[1.5rem] mt-[2rem] rounded-[25px]">
           <h2 className="text-[1.3rem] mb-[0.5rem]">Featured Products</h2>
-          <div className="m-[1rem] grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] justify-center items-center gap-y-[1rem]">
-            {items?.length > 0 ? (
-              items.map((item) => (
-                <div className="w-[200px] bg-[white] p-[.5rem]" key={item.id}>
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="size-full h-[130px]"
-                  />
-                  <p className="text-[rgba(0,0,0,0.6)] text-xs pt-[.4rem]">
-                    {item.category.name}
-                  </p>
-                  <p>{item.name}</p>
-                  <div className="pt-[1rem] flex justify-between items-center">
-                    <span>&#8377; {item.price.$numberDecimal}</span>
-                    <button
-                      className="flex items-center p-[.5rem]"
-                      style={{ backgroundColor: "rgba(246, 226, 171, 1)" }}
-                    >
-                      <img src={cart} alt="cart" className="mr-[.5rem]" />
-                      Add
-                    </button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>No Featured Products</p>
-            )}
-          </div>
+          <Items items={items}></Items>
         </div>
       </section>
 

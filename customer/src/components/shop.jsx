@@ -1,9 +1,14 @@
 import "../style.css";
+import { useLocation } from "react-router-dom";
 
 function Shop() {
+  const { pathname } = useLocation();
   return (
     <>
-      <section className="layout">Shop Section</section>
+      <section className="layout">
+        <p>{pathname.split("/")}</p>
+        Shop Section
+      </section>
     </>
   );
 }
