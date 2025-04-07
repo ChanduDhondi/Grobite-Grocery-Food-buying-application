@@ -6,6 +6,10 @@ import "../style.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import cart from "../../Home icons/li_shopping-cart.png";
+import deals1 from "../../Home icons/deals1.png";
+import deals2 from "../../Home icons/deals2.png";
+import deals3 from "../../Home icons/deals3.png";
+import Deals from "./deals";
 
 function Home() {
   const [category, setCategory] = useState([]);
@@ -34,6 +38,7 @@ function Home() {
 
   return (
     <>
+      {/* Hero section */}
       <section
         className="layout h-[25rem] rounded-lg p-[1rem] bg-cover bg-center flex items-center justify-between"
         style={{ backgroundImage: `url(${banner})` }}
@@ -58,6 +63,7 @@ function Home() {
         </div>
       </section>
 
+      {/* Categories section */}
       <section className="layout ">
         <h2 className="text-[1.3rem] p-[1rem]">Explore Categories</h2>
         <div className="m-[1rem] flex flex-wrap justify-between items-center gap-x-[.2rem]">
@@ -81,6 +87,7 @@ function Home() {
         </div>
       </section>
 
+      {/* Products section */}
       <section className="layout ">
         <div className="bg-[rgba(245,245,245,1)] p-[1.5rem] mt-[2rem] rounded-[25px]">
           <h2 className="text-[1.3rem] mb-[0.5rem]">Featured Products</h2>
@@ -113,6 +120,41 @@ function Home() {
               <p>No Featured Products</p>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* Deals section */}
+      <section className="layout">
+        <div className="flex justify-center items-center gap-[1rem]">
+          <Deals
+            h1={"Get Your Groceries Deliver for Free"}
+            p={
+              "Order now and get free delivery on orders above 50,000 NGN. Shop from the comfort of your home and let us bring your groceries to you."
+            }
+            bg={"rgba(197, 234, 217, 0.78)"}
+            img={deals1}
+            btn={"Order Now"}
+            btnBg={"rgba(38, 50, 56, 1)"}
+            btnCol={"white"}
+          ></Deals>
+          <Deals
+            h1={"Deals of the Day"}
+            p={""}
+            bg={"rgba(223, 180, 61, 1)"}
+            img={deals2}
+            btn={"Shop Now"}
+            btnBg={"white"}
+            btnCol={"black"}
+          ></Deals>
+          <Deals
+            h1={"Weekend Deals"}
+            p={"10% OFF"}
+            bg={"rgba(237, 132, 126, 1)"}
+            img={deals3}
+            btn={"Shop Now"}
+            btnBg={"white"}
+            btnCol={"black"}
+          ></Deals>
         </div>
       </section>
     </>

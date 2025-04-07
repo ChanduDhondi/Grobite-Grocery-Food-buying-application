@@ -3,8 +3,8 @@ import Layout from "./components/layout.jsx";
 import Home from "./components/home.jsx";
 import Shop from "./components/shop.jsx";
 import Cart from "./components/cart.jsx";
-import Login from "./components/login.jsx";
-import Logout from "./components/login.jsx";
+import Profile from "./components/profile.jsx";
+import Logout from "./components/logout.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="shop" element={<Shop />} />
             <Route path="cart" element={<Cart />} />
-            <Route path="login" element={<Login />} />
+            <Route path="profile" element={<Profile />} />
             <Route path="logout" element={<Logout />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
