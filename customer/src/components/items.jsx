@@ -1,6 +1,9 @@
 import cart from "../../Home icons/li_shopping-cart.png";
 
 function Items({ items }) {
+  function handleAdd() {
+    console.log("Add to cart button is clicked ");
+  }
   return (
     <>
       <div className="m-[1rem] grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] justify-center items-center gap-y-[1rem]">
@@ -21,6 +24,7 @@ function Items({ items }) {
                 <button
                   className="flex items-center p-[.5rem]"
                   style={{ backgroundColor: "rgba(246, 226, 171, 1)" }}
+                  onClick={handleAdd}
                 >
                   <img src={cart} alt="cart" className="mr-[.5rem]" />
                   Add

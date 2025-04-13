@@ -19,7 +19,7 @@ function Home() {
   useEffect(() => {
     const fetchCategory = async () => {
       const data = await axios.get(URL + "category");
-      setCategory(data);
+      setCategory(data.data);
     };
 
     const fetItems = async () => {
@@ -67,8 +67,8 @@ function Home() {
       <section className="layout ">
         <h2 className="text-[1.3rem] p-[1rem]">Explore Categories</h2>
         <div className="m-[1rem] flex flex-wrap justify-between items-center gap-x-[.2rem]">
-          {category?.data?.length > 0 ? (
-            category.data.map((cat) => (
+          {category?.length > 0 ? (
+            category.map((cat) => (
               <div
                 className="p-[0.4rem] text-center rounded-[10px] bg-[rgba(246,226,171,1)]"
                 key={cat.id || cat.name}

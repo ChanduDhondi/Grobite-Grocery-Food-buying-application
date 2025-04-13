@@ -3,3 +3,9 @@
 .layout {
   margin: 1rem 3rem;
 }
+
+.card {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
+}
