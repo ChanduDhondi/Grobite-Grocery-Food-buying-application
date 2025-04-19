@@ -3,7 +3,7 @@ import rightarrow from "../../Home icons/li_arrow-right.png";
 import heroimage from "../../Home icons/hero image.png";
 import { Link } from "react-router-dom";
 import "../style.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import deals1 from "../../Home icons/deals1.png";
 import deals2 from "../../Home icons/deals2.png";
@@ -11,10 +11,11 @@ import deals3 from "../../Home icons/deals3.png";
 import Deals from "./deals";
 import Items from "./items";
 
+const URL = "http://127.0.0.1:8080/api/";
+
 function Home() {
   const [category, setCategory] = useState([]);
   const [items, setItems] = useState([]);
-  const URL = "http://127.0.0.1:8080/api/";
 
   useEffect(() => {
     const fetchCategory = async () => {
