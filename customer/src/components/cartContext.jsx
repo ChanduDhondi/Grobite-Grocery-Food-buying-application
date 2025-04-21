@@ -17,14 +17,19 @@ export const CartProvider = ({ children }) => {
   }
 
   function removeFromCart(id) {
-    console.log("removing id ", id);
     setCartItems((preCart) =>
       preCart.filter((item) => (item.id || item._id) !== id)
     );
   }
 
+  function emptyCart() {
+    setCartItems([]);
+  }
+
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ cartItems, addToCart, removeFromCart, emptyCart }}
+    >
       {children}
     </CartContext.Provider>
   );

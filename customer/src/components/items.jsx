@@ -26,7 +26,7 @@ function Items({ items }) {
               <div className="pt-[1rem] flex justify-between items-center">
                 <span>&#8377; {item.price.$numberDecimal}</span>
                 <button
-                  className="flex items-center p-[.5rem] active:scale-[1.1]"
+                  className="flex items-center p-[.5rem] active:scale-[1.1] transition"
                   style={{ backgroundColor: "rgba(246, 226, 171, 1)" }}
                   onClick={() => addToCart(item)}
                 >

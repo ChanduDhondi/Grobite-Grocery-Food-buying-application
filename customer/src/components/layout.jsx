@@ -32,8 +32,8 @@ function Layout() {
                 <img src={cart} alt="cart" className="h-fit" />
               </li>
               <li className="flex gap-2 items-center">
-                <Link to="/profile">Profile</Link>
-                <img src={profile} alt="profile" className="h-fit" />
+                <Link to="/profile">User</Link>
+                <img src={profile} alt="user" className="h-fit" />
               </li>
               <li className="flex gap-2 items-center">
                 <Link to="/logout" style={{ color: "rgb(224, 79, 95)" }}>

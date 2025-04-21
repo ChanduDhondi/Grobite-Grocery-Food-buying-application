@@ -1,15 +1,20 @@
 import "../style.css";
 import { useLocation } from "react-router-dom";
 import BreadCrumb from "./breadcrumb";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "./cartContext";
 import CartTable from "./cartTable";
+import PaymentSuccessModal from "./paymentModal";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
   const { pathname } = useLocation();
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, emptyCart } = useContext(CartContext);
+  const navigate = useNavigate();
   const [isFilter, setIsFilter] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   function handleChange(evt) {
     console.log(evt.target.value);
@@ -33,6 +38,29 @@ function Cart() {
       setIsFilter(false);
     }
   }
+
+  function handleConfirm() {
+    if (!cartItems.length) {
+      alert("Please add some Items to Confirm Order");
+      return;
+    }
+    setIsConfirm(true);
+    setIsProcessing(true);
+  }
+
+  useEffect(() => {
+    if (!isConfirm) return;
+
+    const timeoutId = setTimeout(() => {
+      navigate("/user");
+      emptyCart();
+      sessionStorage.removeItem("cartItem");
+    }, 1500);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isConfirm]);
 
   return (
     <>
@@ -77,33 +105,49 @@ function Cart() {
           ) : (
             <CartTable items={cartItems}></CartTable>
           )}
-          {/* Total */}
-          <div className="flex justify-end mt-4 ">
-            <div className="p-[1rem] border rounded-[5px] w-fit relative right-0">
-              <span className="text-2xl">Total</span> &nbsp;{" "}
-              <span className="text-4xl" style={{ color: "green" }}>
-                &#8377;
-                {cartItems.reduce(
-                  (acc, currValue) =>
-                    acc + parseFloat(currValue.price.$numberDecimal),
-                  0
-                )}
-              </span>
-            </div>
-          </div>
-          {/* Proceed to Checkout */}
-          <div className="flex justify-end mt-[2rem] ">
-            <div
-              className="py-[1rem] px-[1.5rem] rounded-[5px] w-fit relative right-0 text-4xl"
-              style={{
-                backgroundColor: "rgba(223, 90, 61, 1)",
-                color: "white",
-              }}
-            >
-              Proceed to Checkout
-            </div>
-          </div>
+
+          {cartItems.length > 0 && (
+            <>
+              <div className="flex justify-end mt-4 ">
+                <div className="p-[1rem] border rounded-[5px] w-fit relative right-0">
+                  <span className="text-2xl">Total</span> &nbsp;{" "}
+                  <span className="text-4xl" style={{ color: "green" }}>
+                    &#8377;
+                    {cartItems.reduce(
+                      (acc, currValue) =>
+                        acc + parseFloat(currValue.price.$numberDecimal),
+                      0
+                    )}
+                  </span>
+                </div>
+              </div>
+              <div className="flex justify-end mt-[2rem] ">
+                <button
+                  className="py-[1rem] px-[1.5rem] rounded-[5px] w-fit relative right-0 text-3xl active:scale-[1.03] transition"
+                  style={{
+                    backgroundColor: "rgba(223, 90, 61, 1)",
+                    color: "white",
+                  }}
+                  onClick={handleConfirm}
+                  disabled={isProcessing}
+                  aria-label="Confirm your order"
+                >
+                  {isProcessing ? (
+                    <>
+                      <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                      Processing...
+                    </>
+                  ) : (
+                    "Confirm Order"
+                  )}
+                </button>
+              </div>
+            </>
+          )}
         </div>
+
+        {/* Payment modal */}
+        {isConfirm && <PaymentSuccessModal></PaymentSuccessModal>}
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import "../style.css";
 function Profile() {
   return (
     <>
-      <section className="layout">Profile Section</section>
+      <section className="layout">User Account Page</section>
     </>
   );
 }
