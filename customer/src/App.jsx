@@ -4,27 +4,35 @@ import Home from "./components/home.jsx";
 import Shop from "./components/shop.jsx";
 import Cart from "./components/cart.jsx";
 import Profile from "./components/profile.jsx";
+import Login from "./components/login.jsx";
 import Logout from "./components/logout.jsx";
+import Register from "./components/register.jsx";
+import NoPage from "./components/noPage.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./components/cartContext.jsx";
+import { AuthProvider } from "./components/authContext.jsx";
 
 function App() {
   return (
     <>
-      <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
-              <Route path="shop" element={<Shop />} />
-              <Route path="cart" element={<Cart />} />
-              <Route path="user" element={<Profile />} />
-              <Route path="logout" element={<Logout />} />
-              {/* <Route path="*" element={<NoPage />} /> */}
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
+      <AuthProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<Home />} />
+                <Route path="shop" element={<Shop />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="user" element={<Profile />} />
+                <Route path="login" element={<Login />} />
+                <Route path="logout" element={<Logout />} />
+                <Route path="register" element={<Register />} />
+                <Route path="*" element={<NoPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </AuthProvider>
     </>
   );
 }

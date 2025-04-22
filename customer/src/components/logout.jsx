@@ -3,7 +3,7 @@ import "../style.css";
 function Logout() {
   return (
     <>
-      <section className="layout">Logout Section</section>
+      <section className="layout">logout section</section>
     </>
   );
 }
