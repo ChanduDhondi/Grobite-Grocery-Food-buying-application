@@ -1,12 +1,15 @@
 import "../style.css";
 import logo from "../../footer icons/footer_logo.png";
 import { useState } from "react";
+import back from "../../Home icons/back.png";
+import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {
     const { name, value } = evt.target;
@@ -18,6 +21,11 @@ function Login() {
       [name]: value,
     }));
   }
+
+  function handleBack() {
+    navigate(-1);
+  }
+
   function handleSubmit(evt) {
     evt.preventDefault();
     let validationErrors = {};
@@ -33,9 +41,16 @@ function Login() {
       >
         <img src={logo} alt="logo" className="w-[250px]" />
         <div
-          className="p-[2rem] min-w-[30%] rounded-xl"
+          className="p-[2rem] min-w-[30%] rounded-xl relative"
           style={{ backgroundColor: "#23460f", color: "white" }}
         >
+          <button
+            onClick={handleBack}
+            className="absolute top-2 left-2 rounded-[50%]"
+            style={{ backgroundColor: "white" }}
+          >
+            <img src={back} alt="back" />
+          </button>
           <h1 className="text-3xl text-center">Login</h1>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col my-[1.5rem]">
@@ -76,6 +91,14 @@ function Login() {
               </button>
             </div>
           </form>
+          <div className="flex justify-between mt-[10px]">
+            <span>Don't have account</span>
+            <span>
+              <button className="underline">
+                <Link to="/register">Register here!</Link>
+              </button>
+            </span>
+          </div>
         </div>
       </section>
     </>
