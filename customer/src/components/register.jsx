@@ -3,6 +3,7 @@ import logo from "../../footer icons/footer_logo.png";
 import { useState } from "react";
 import back from "../../Home icons/back.png";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 
 function Register() {
   const [data, setData] = useState({
@@ -11,7 +12,7 @@ function Register() {
     password: "",
     phone: "",
   });
-  const URL = "http:127.0.0.1/api";
+  const URL = "http://127.0.0.1:8080/api";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {
@@ -37,6 +38,20 @@ function Register() {
     if (!data.password) validationErrors.password = "Password is required";
     if (!data.phone) validationErrors.phone = "Phone is required";
     setError(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
+    try {
+      const response = await axios.post(URL + "/register", data);
+      if (response?.data) window.alert(response.data.message);
+      setData({
+        name: "",
+        email: "",
+        password: "",
+        phone: "",
+      });
+    } catch (err) {
+      const errorMessage = err.response?.data?.error || "Something went wrong!";
+      window.alert("Register Error: " + errorMessage);
+    }
   }
   return (
     <>

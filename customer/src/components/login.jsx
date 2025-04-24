@@ -11,7 +11,7 @@ function Login() {
     email: "",
     password: "",
   });
-  const URL = "http:127.0.0.1/api";
+  const URL = "http://127.0.0.1:8080/api";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   const { login } = useContext(AuthContext);
@@ -33,6 +33,7 @@ function Login() {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
+    console.log(URL);
     let validationErrors = {};
     if (!data.email) validationErrors.email = "Email is required";
     if (!data.password) validationErrors.password = "Password is required";
