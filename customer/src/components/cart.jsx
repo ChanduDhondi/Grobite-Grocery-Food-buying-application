@@ -16,6 +16,8 @@ function Cart() {
   const [isConfirm, setIsConfirm] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  console.log(cartItems);
+
   function handleChange(evt) {
     console.log(evt.target.value);
     if (evt.target.value === "price") {

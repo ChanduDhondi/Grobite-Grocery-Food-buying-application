@@ -20,7 +20,7 @@ const categorySchema = new mongoose.Schema({
 
 categorySchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
-    await Items.deleteMany({ category: doc.id });
+    await Items.deleteMany({ category: doc._id });
     console.log(`Items Related to the Category: ${this.name} are deleted`);
   }
 });

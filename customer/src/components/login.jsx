@@ -27,24 +27,26 @@ function Login() {
     }));
   }
 
-  function handleBack() {
-    navigate(-1);
-  }
-
   async function handleSubmit(evt) {
     evt.preventDefault();
-    console.log(URL);
     let validationErrors = {};
     if (!data.email) validationErrors.email = "Email is required";
     if (!data.password) validationErrors.password = "Password is required";
     setError(validationErrors);
-    if (!Object.keys(validationErrors).length > 0) return;
-
+    if (Object.keys(validationErrors).length > 0) return;
     try {
       const response = await axios.post(URL + "/login", data);
       console.log(response);
+      if (response?.data) window.alert(response.data.message);
+      setData({
+        email: "",
+        password: "",
+      });
+      //store token in session storage
+      login(response?.data.token);
+      navigate(-1);
     } catch (err) {
-      console.log("Login Error:", err);
+      window.alert("Login Error:" + err.response?.data?.error);
     }
   }
   return (
@@ -59,7 +61,7 @@ function Login() {
           style={{ backgroundColor: "#23460f", color: "white" }}
         >
           <button
-            onClick={handleBack}
+            onClick={() => navigate(-1)}
             className="absolute top-2 left-2 rounded-[50%]"
             style={{ backgroundColor: "white" }}
           >
@@ -97,9 +99,9 @@ function Login() {
             </div>
             <div className="mt-[1.5rem] flex justify-center">
               <button
+                type="submit"
                 className="w-[50%] py-[.2rem] rounded-md active:scale-[1.05] transition"
                 style={{ backgroundColor: "#5c844c" }}
-                onSubmit={handleSubmit}
               >
                 Login
               </button>

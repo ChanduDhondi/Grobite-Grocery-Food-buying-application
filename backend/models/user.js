@@ -42,17 +42,11 @@ const userSchema = new mongoose.Schema({
       zip: String,
     },
   ],
-  orders: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Orders",
-    },
-  ],
 });
 
 userSchema.post("findOneAndDelete", async function (doc) {
   if (doc) {
-    await Orders.deleteMany({ _id: { $in: doc.orders } });
+    await Orders.deleteMany({ user: doc._id });
   }
 });
 

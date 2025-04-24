@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     }
   });
 
-  function login({ newToken }) {
+  function login(newToken) {
     localStorage.setItem("token", newToken);
     setToken(newToken);
     setUser(jwtDecode(newToken));

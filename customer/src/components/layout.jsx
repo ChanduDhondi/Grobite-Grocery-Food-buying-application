@@ -7,14 +7,14 @@ import footerLogo from "../../footer icons/footer_logo.png";
 import mail from "../../footer icons/mail.png";
 import location from "../../footer icons/location.png";
 import phone from "../../footer icons/phone.png";
-import logout from "../../Home icons/logout.png";
+import logoutIcon from "../../Home icons/logout.png";
 import login from "../../Home icons/login.png";
 import { useContext } from "react";
 import AuthContext from "./authContext";
 import { useLocation } from "react-router-dom";
 
 function Layout() {
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
   const loc = useLocation();
   const hideNavbarPaths = ["/login", "/logout", "/register"];
   return (
@@ -46,10 +46,14 @@ function Layout() {
                 <li className="flex gap-2 items-center">
                   {user ? (
                     <>
-                      <Link to="/logout" style={{ color: "rgb(224, 79, 95)" }}>
+                      <Link
+                        to="/logout"
+                        style={{ color: "rgb(224, 79, 95)" }}
+                        onClick={() => logout()}
+                      >
                         Logout
                       </Link>
-                      <img src={logout} alt="logout" className="h-[30px]" />
+                      <img src={logoutIcon} alt="logout" className="h-[30px]" />
                     </>
                   ) : (
                     <>

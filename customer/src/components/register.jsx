@@ -26,10 +26,6 @@ function Register() {
     }));
   }
 
-  function handleBack() {
-    navigate(-1);
-  }
-
   async function handleSubmit(evt) {
     evt.preventDefault();
     let validationErrors = {};
@@ -65,7 +61,7 @@ function Register() {
           style={{ backgroundColor: "#23460f", color: "white" }}
         >
           <button
-            onClick={handleBack}
+            onClick={() => navigate(-1)}
             className="absolute top-2 left-2 rounded-[50%]"
             style={{ backgroundColor: "white" }}
           >
@@ -74,7 +70,7 @@ function Register() {
           <h1 className="text-3xl text-center">Register</h1>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col my-[1.5rem]">
-              <label htmlFor="name">Name:</label>
+              <label htmlFor="name">Full Name:</label>
               <input
                 type="text"
                 name="name"
@@ -133,9 +129,9 @@ function Register() {
             </div>
             <div className="mt-[1.5rem] flex justify-center">
               <button
+                type="submit"
                 className="w-[50%] py-[.2rem] rounded-md active:scale-[1.05] transition"
                 style={{ backgroundColor: "#5c844c" }}
-                onSubmit={handleSubmit}
               >
                 Register
               </button>

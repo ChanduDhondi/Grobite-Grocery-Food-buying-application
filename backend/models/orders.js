@@ -7,17 +7,21 @@ const ordersSchema = mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["Pending", "Delivered", "Canceled"],
+    enum: ["successful", "Delivered", "Canceled"],
   },
   items: [
     {
       itemId: String,
       name: String,
       price: mongoose.Types.Decimal128,
-      quantity: Number,
     },
   ],
   totalPrice: mongoose.Types.Decimal128,
+  user: {
+    type: mongoose.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 const Orders = mongoose.model("Orders", ordersSchema);
