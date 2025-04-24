@@ -1,16 +1,21 @@
 import "../style.css";
 import logo from "../../footer icons/footer_logo.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import back from "../../Home icons/back.png";
 import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import AuthContext from "./authContext";
 
 function Login() {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  const URL = "http:127.0.0.1/api";
   const navigate = useNavigate();
   const [error, setError] = useState({});
+  const { login } = useContext(AuthContext);
+
   function handleChange(evt) {
     const { name, value } = evt.target;
 
@@ -26,12 +31,20 @@ function Login() {
     navigate(-1);
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     let validationErrors = {};
     if (!data.email) validationErrors.email = "Email is required";
     if (!data.password) validationErrors.password = "Password is required";
     setError(validationErrors);
+    if (!Object.keys(validationErrors).length > 0) return;
+
+    try {
+      const response = await axios.post(URL + "/login", data);
+      console.log(response);
+    } catch (err) {
+      console.log("Login Error:", err);
+    }
   }
   return (
     <>

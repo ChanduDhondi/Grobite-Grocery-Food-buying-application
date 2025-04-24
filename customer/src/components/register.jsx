@@ -11,6 +11,7 @@ function Register() {
     password: "",
     phone: "",
   });
+  const URL = "http:127.0.0.1/api";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {
@@ -28,7 +29,7 @@ function Register() {
     navigate(-1);
   }
 
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
     let validationErrors = {};
     if (!data.email) validationErrors.name = "Name is required";
