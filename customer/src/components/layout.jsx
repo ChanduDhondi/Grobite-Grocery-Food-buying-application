@@ -44,7 +44,7 @@ function Layout() {
                   <img src={profile} alt="user" className="h-fit" />
                 </li>
                 <li className="flex gap-2 items-center">
-                  {user ? (
+                  {user && (
                     <>
                       <Link
                         to="/logout"
@@ -55,14 +55,15 @@ function Layout() {
                       </Link>
                       <img src={logoutIcon} alt="logout" className="h-[30px]" />
                     </>
-                  ) : (
+                  )}
+                  {/* (
                     <>
                       <Link to="/login" style={{ color: "rgb(224, 79, 95)" }}>
                         Login
                       </Link>
                       <img src={login} alt="login" className="h-[30px]" />
                     </>
-                  )}
+                  )} */}
                 </li>
               </ul>
             </div>

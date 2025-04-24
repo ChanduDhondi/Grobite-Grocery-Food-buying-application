@@ -99,7 +99,10 @@ function User() {
           </div>
 
           {/* Order history */}
-          <div className="min-w-[50%] py-[.3rem] px-[.5rem] border rounded-xl flex flex-col gap-[.6rem]">
+          <div
+            className="min-w-[50%] py-[.7rem] px-[1rem] border rounded-xl flex flex-col gap-[.6rem]"
+            style={{ backgroundColor: "rgba(250, 250, 250, 1)" }}
+          >
             <h1 className="text-2xl">Order History</h1>
           </div>
         </div>

@@ -11,6 +11,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./components/cartContext.jsx";
 import { AuthProvider } from "./components/authContext.jsx";
 import User from "./components/user.jsx";
+import PrivateRoute from "./components/privateRoute.jsx";
 
 function App() {
   return (
@@ -23,7 +24,14 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="shop" element={<Shop />} />
                 <Route path="cart" element={<Cart />} />
-                <Route path="user" element={<User />} />
+                <Route
+                  path="user"
+                  element={
+                    <PrivateRoute>
+                      <User />
+                    </PrivateRoute>
+                  }
+                />
                 <Route path="login" element={<Login />} />
                 <Route path="logout" element={<Logout />} />
                 <Route path="register" element={<Register />} />
