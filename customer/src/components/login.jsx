@@ -36,8 +36,6 @@ function Login() {
     if (Object.keys(validationErrors).length > 0) return;
     try {
       const response = await axios.post(URL + "/login", data);
-      console.log(response);
-      if (response?.data) window.alert(response.data.message);
       setData({
         email: "",
         password: "",

@@ -3,20 +3,22 @@ import { useLocation } from "react-router-dom";
 import BreadCrumb from "./breadcrumb";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "./cartContext";
+import AuthContext from "./authContext";
 import CartTable from "./cartTable";
 import PaymentSuccessModal from "./paymentModal";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Cart() {
+  const URL = "http://127.0.0.1:8080/api";
   const { pathname } = useLocation();
   const { cartItems, emptyCart } = useContext(CartContext);
+  const { user, token } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isFilter, setIsFilter] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isConfirm, setIsConfirm] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-
-  console.log(cartItems);
 
   function handleChange(evt) {
     console.log(evt.target.value);
@@ -41,13 +43,40 @@ function Cart() {
     }
   }
 
-  function handleConfirm() {
-    if (!cartItems.length) {
-      alert("Please add some Items to Confirm Order");
-      return;
+  async function handleConfirm() {
+    const items = cartItems.map((item) => ({
+      itemId: item._id,
+      name: item.name,
+      price: item.price,
+    }));
+    const totalPrice = cartItems.reduce(
+      (acc, currValue) => acc + parseFloat(currValue.price.$numberDecimal),
+      0
+    );
+    try {
+      const response = await axios.post(
+        URL + "/order",
+        {
+          status: "successful",
+          items: items,
+          totalPrice: totalPrice,
+          userId: user.id,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log("Order placed successfully:", response.data);
+    } catch (err) {
+      console.log(
+        "Error while placing Order",
+        err.response?.data?.error || "something went wrong"
+      );
+      return window.alert(
+        err.response?.data?.error || "Something went wrong! Try again"
+      );
     }
     setIsConfirm(true);
     setIsProcessing(true);
+    emptyCart();
   }
 
   useEffect(() => {

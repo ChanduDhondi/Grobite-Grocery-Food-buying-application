@@ -11,7 +11,7 @@ import logoutIcon from "../../Home icons/logout.png";
 import login from "../../Home icons/login.png";
 import { useContext } from "react";
 import AuthContext from "./authContext";
-import { useLocation } from "react-router-dom";
+import { useLocation, Navigate } from "react-router-dom";
 
 function Layout() {
   const { user, logout } = useContext(AuthContext);
@@ -53,6 +53,7 @@ function Layout() {
                       >
                         Logout
                       </Link>
+
                       <img src={logoutIcon} alt="logout" className="h-[30px]" />
                     </>
                   )}
@@ -63,7 +64,7 @@ function Layout() {
                       </Link>
                       <img src={login} alt="login" className="h-[30px]" />
                     </>
-                  )} */}
+                  ) */}
                 </li>
               </ul>
             </div>

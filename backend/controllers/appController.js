@@ -4,7 +4,7 @@ const Items = require("../models/items.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user.js");
-const { get } = require("mongoose");
+const Orders = require("../models/orders.js");
 
 const category = async (req, res) => {
   try {
@@ -94,6 +94,31 @@ const login = async (req, res) => {
   }
 };
 
+const createOrder = async (req, res) => {
+  const { status, items, totalPrice, userId } = req.body;
+  if (!status || !items || !totalPrice || !userId)
+    return res
+      .status(401)
+      .json({ error: "Required Fields: Status, Items, totalPrice, UserId" });
+
+  console.log(status, items, totalPrice, userId);
+  try {
+    await Orders.insertOne({
+      status,
+      items,
+      totalPrice,
+      user: userId,
+    });
+    res.status(201).json({ message: "Order created successfully" });
+  } catch (err) {
+    console.log("Error while creating Order", err.message);
+    res.status(500).json({
+      message: "Connection error while creating order",
+      error: err.message,
+    });
+  }
+};
+
 const getUser = async (req, res) => {
   const { userId } = req.userId;
 
@@ -108,4 +133,4 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { category, items, register, login, getUser };
+module.exports = { category, items, register, login, createOrder, getUser };

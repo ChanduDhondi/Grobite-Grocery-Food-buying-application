@@ -7,6 +7,7 @@ const {
   items,
   register,
   login,
+  createOrder,
   getUser,
 } = require("../controllers/appController");
 
@@ -17,6 +18,7 @@ router.get("/category", category);
 router.get("/items", items);
 router.post("/register", register);
 router.post("/login", login);
+router.post("/order", isAuthenticate, createOrder);
 router.get("/user/:id", isAuthenticate, getUser);
 
 module.exports = router;
