@@ -17,7 +17,7 @@ function User() {
     socket.on("orderError", (data) => {
       console.error("Error:", data.error);
     });
-    socket.emit("registerUser", user.id);
+    if (user) socket.emit("registerUser", user.id);
     socket.on("showOrders", (data) => {
       setOrders(data);
       console.log(data);
@@ -119,39 +119,46 @@ function User() {
 
             {/* Order history */}
             <div
-              className="min-w-[50%] h-full py-[.7rem] px-[1rem] border rounded-xl flex flex-col gap-[.6rem] overflow-auto"
+              className="min-w-[50%] h-full  border rounded-xl flex flex-col gap-[.6rem] overflow-auto"
               style={{ backgroundColor: "rgba(250, 250, 250, 1)" }}
             >
               <h1
-                className="text-2xl  sticky top-0 py-[.5rem]"
+                className="text-2xl py-[.7rem] px-[1rem] sticky top-0 py-[.5rem] "
                 style={{ backgroundColor: "rgba(250, 250, 250, 1)" }}
               >
                 Order History
               </h1>
-              {orders?.length > 0 ? (
-                orders.map((order) => (
-                  <>
-                    <div className="flex gap-[.6rem]">
-                      <div className="w-[70%] text-lg">
-                        {order.items.map((item) => item.name.concat(", "))}
+              {/* content */}
+              <div className="py-[.5rem] px-[1rem]">
+                {orders?.length > 0 ? (
+                  orders.map((order, index) => (
+                    <div key={order._id || index}>
+                      <div className="flex gap-[.6rem]">
+                        <div className="w-[70%] text-lg">
+                          {order.items.map((item) => item.name.concat(", "))}
+                        </div>
+                        <div className="w-[30%] text-right flex flex-col gap-[.5rem]">
+                          <h3 className="text-2xl font-bold">
+                            &#8377;{order.totalPrice.$numberDecimal}
+                          </h3>
+                          <p>
+                            {
+                              new Date(order.date)
+                                .toLocaleString()
+                                .split(",")[0]
+                            }
+                          </p>
+                        </div>
                       </div>
-                      <div className="w-[30%] text-right flex flex-col gap-[.5rem]">
-                        <h3 className="text-2xl font-bold">
-                          &#8377;{order.totalPrice.$numberDecimal}
-                        </h3>
-                        <p>
-                          {new Date(order.date).toLocaleString().split(",")[0]}
-                        </p>
-                      </div>
+                      <hr className="w-full h-px py-[.5rem]" />
                     </div>
-                    <hr className="w-full h-px" />
-                  </>
-                ))
-              ) : (
-                <h1 className="text-xl relative top-[40%] left-[40%]">
-                  No Orders Exists!
-                </h1>
-              )}
+                  ))
+                ) : (
+                  <h1 className="text-xl relative top-[40%] left-[40%]">
+                    No Orders Exists!
+                  </h1>
+                )}
+              </div>
             </div>
           </div>
         </section>

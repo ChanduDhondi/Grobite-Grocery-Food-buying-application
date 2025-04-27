@@ -76,6 +76,7 @@ function Shop() {
             <h1 className="text-3xl">Explore our Shop</h1>
             <input
               type="text"
+              id="searchBox"
               placeholder="Find what you need..."
               value={searchProduct}
               onChange={handleSearch}

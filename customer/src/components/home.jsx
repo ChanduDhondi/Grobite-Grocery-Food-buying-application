@@ -31,7 +31,6 @@ function Home() {
         randomItems.push(data.data[randomIdx]);
       }
       setItems(randomItems);
-      console.log(randomItems);
     };
     fetchCategory();
     fetItems();
@@ -72,7 +71,7 @@ function Home() {
             category.map((cat) => (
               <div
                 className="p-[0.4rem] text-center rounded-[10px] bg-[rgba(246,226,171,1)]"
-                key={cat.id || cat.name}
+                key={cat._id || cat.name}
               >
                 <img
                   src={cat.imageUrl}

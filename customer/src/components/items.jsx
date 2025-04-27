@@ -10,10 +10,7 @@ function Items({ items }) {
       <div className="m-[1rem] grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] justify-center items-center gap-y-[1rem]">
         {items?.length > 0 ? (
           items.map((item, index) => (
-            <div
-              className="w-[200px] bg-[white] p-[.5rem]"
-              key={item._id || index}
-            >
+            <div className="w-[200px] bg-[white] p-[.5rem]" key={index}>
               <img
                 src={item.imageUrl}
                 alt={item.name}
