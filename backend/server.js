@@ -4,12 +4,21 @@ const http = require("http");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const { Server } = require("socket.io");
+const socket = require("./socket.js");
 
 //routes
 const appRoute = require("./routes/appRouter");
 
 const app = express();
 const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+socket(io);
 
 //db connection
 main()

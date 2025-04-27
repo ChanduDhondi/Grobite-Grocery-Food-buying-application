@@ -7,13 +7,14 @@ import AuthContext from "./authContext";
 import CartTable from "./cartTable";
 import PaymentSuccessModal from "./paymentModal";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { io } from "socket.io-client";
+const socket = io("http://127.0.0.1:8080");
 
 function Cart() {
   const URL = "http://127.0.0.1:8080/api";
   const { pathname } = useLocation();
   const { cartItems, emptyCart } = useContext(CartContext);
-  const { user, token } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [isFilter, setIsFilter] = useState(false);
   const [filteredItems, setFilteredItems] = useState([]);
@@ -54,17 +55,15 @@ function Cart() {
       0
     );
     try {
-      const response = await axios.post(
-        URL + "/order",
-        {
-          status: "successful",
-          items: items,
-          totalPrice: totalPrice,
-          userId: user.id,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      console.log("Order placed successfully:", response.data);
+      socket.on("orderError", (data) => {
+        window.alert(`${data.error}`);
+      });
+      socket.emit("newOrder", {
+        status: "successful",
+        items: items,
+        totalPrice: totalPrice,
+        userId: user.id,
+      });
     } catch (err) {
       console.log(
         "Error while placing Order",
