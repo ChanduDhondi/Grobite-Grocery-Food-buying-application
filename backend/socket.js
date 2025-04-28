@@ -28,7 +28,9 @@ function handleSocket(socket) {
         totalPrice,
         user: userId,
       });
-      const orders = await Orders.find({ user: userId }).toArray();
+      const orders = await Orders.find({ user: userId })
+        .sort({ date: -1 })
+        .toArray();
       socket.emit("showOrders", orders);
     } catch (err) {
       console.log("Error while creating Order", err.message);

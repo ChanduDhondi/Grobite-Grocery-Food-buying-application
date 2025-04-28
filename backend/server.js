@@ -7,10 +7,6 @@ const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const socket = require("./socket.js");
 
-//middlewares
-app.use(bodyParser.json());
-app.use(cors());
-
 //routes
 const appRoute = require("./routes/appRouter");
 
@@ -23,6 +19,10 @@ const io = new Server(server, {
   },
 });
 socket(io);
+
+//middlewares
+app.use(bodyParser.json());
+app.use(cors());
 
 //db connection
 main()
