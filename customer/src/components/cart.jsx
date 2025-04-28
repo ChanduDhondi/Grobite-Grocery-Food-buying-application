@@ -53,25 +53,15 @@ function Cart() {
       (acc, currValue) => acc + parseFloat(currValue.price.$numberDecimal),
       0
     );
-    try {
-      socket.on("orderError", (data) => {
-        window.alert(`${data.error}`);
-      });
-      socket.emit("newOrder", {
-        status: "successful",
-        items: items,
-        totalPrice: totalPrice,
-        userId: user.id,
-      });
-    } catch (err) {
-      console.log(
-        "Error while placing Order",
-        err.response?.data?.error || "something went wrong"
-      );
-      return window.alert(
-        err.response?.data?.error || "Something went wrong! Try again"
-      );
-    }
+    socket.on("orderError", (data) => {
+      return window.alert(`${data.error}`);
+    });
+    socket.emit("newOrder", {
+      status: "successful",
+      items: items,
+      totalPrice: totalPrice,
+      userId: user.id,
+    });
     setIsConfirm(true);
     setIsProcessing(true);
     emptyCart();
