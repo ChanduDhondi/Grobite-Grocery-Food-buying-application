@@ -11,7 +11,6 @@ import { io } from "socket.io-client";
 const socket = io("https://grobite-backend.onrender.com");
 
 function Cart() {
-  const URL = "https://grobite-backend.onrender.com/api";
   const { pathname } = useLocation();
   const { cartItems, emptyCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);

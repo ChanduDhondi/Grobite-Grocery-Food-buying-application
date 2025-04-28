@@ -11,7 +11,7 @@ function Login() {
     email: "",
     password: "",
   });
-  const URL = "https://grobite-backend.onrender.com/api";
+  const URL = "https://grobite-backend.onrender.com";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   const { login } = useContext(AuthContext);
@@ -35,7 +35,7 @@ function Login() {
     setError(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
     try {
-      const response = await axios.post(URL + "/login", data);
+      const response = await axios.post(URL + "/api/login", data);
       setData({
         email: "",
         password: "",

@@ -12,7 +12,7 @@ function Register() {
     password: "",
     phone: "",
   });
-  const URL = "http://127.0.0.1:8080/api";
+  const URL = "https://grobite-backend.onrender.com";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {
@@ -36,7 +36,7 @@ function Register() {
     setError(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
     try {
-      const response = await axios.post(URL + "/register", data);
+      const response = await axios.post(URL + "/api/register", data);
       if (response?.data) window.alert(response.data.message);
       setData({
         name: "",

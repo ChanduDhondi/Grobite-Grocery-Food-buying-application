@@ -6,7 +6,7 @@ import axios from "axios";
 import Items from "./items";
 
 function Shop() {
-  const URL = "https://grobite-backend.onrender.com/api/";
+  const URL = "https://grobite-backend.onrender.com";
   const { pathname } = useLocation();
   const [searchProduct, setSearchProduct] = useState("");
   const [isSearch, setIsSearch] = useState(false);
@@ -18,7 +18,7 @@ function Shop() {
 
   useEffect(() => {
     const fetchCategory = async () => {
-      const data = await axios.get(URL + "category");
+      const data = await axios.get(URL + "/api/category");
       setCategory(data.data);
 
       if (data?.data?.length > 0) {
@@ -26,7 +26,7 @@ function Shop() {
       }
     };
     const fetchItems = async () => {
-      const response = await axios.get(URL + "items");
+      const response = await axios.get(URL + "/api/items");
       setAllItems(response.data);
     };
 

@@ -11,7 +11,7 @@ import deals3 from "../../Home icons/deals3.png";
 import Deals from "./deals";
 import Items from "./items";
 
-const URL = "https://grobite-backend.onrender.com/api/";
+const URL = "https://grobite-backend.onrender.com";
 
 function Home() {
   const [category, setCategory] = useState([]);
@@ -19,12 +19,12 @@ function Home() {
 
   useEffect(() => {
     const fetchCategory = async () => {
-      const data = await axios.get(URL + "category");
+      const data = await axios.get(URL + "/api/category");
       setCategory(data.data);
     };
 
     const fetItems = async () => {
-      const data = await axios.get(URL + "items");
+      const data = await axios.get(URL + "/api/items");
       let randomItems = [];
       for (let i = 0; i < 25; i++) {
         let randomIdx = Math.floor(Math.random() * data.data.length);
