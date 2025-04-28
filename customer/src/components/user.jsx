@@ -5,7 +5,7 @@ import CartContext from "./cartContext";
 import BreadCrumb from "./breadcrumb";
 import { useLocation, Link } from "react-router-dom";
 import { io } from "socket.io-client";
-const socket = io("https://grobite-backend.onrender.com");
+const socket = io("https://grobite.onrender.com");
 
 function User() {
   const { user } = useContext(AuthContext);

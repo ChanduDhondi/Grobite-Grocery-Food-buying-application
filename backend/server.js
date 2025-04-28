@@ -7,6 +7,10 @@ const mongoose = require("mongoose");
 const { Server } = require("socket.io");
 const socket = require("./socket.js");
 
+//middlewares
+app.use(bodyParser.json());
+app.use(cors());
+
 //routes
 const appRoute = require("./routes/appRouter");
 
@@ -33,10 +37,6 @@ async function main() {
     useUnifiedTopology: true,
   });
 }
-
-//middlewares
-app.use(bodyParser.json());
-app.use(cors());
 
 //route middleware
 app.use("/api", appRoute);

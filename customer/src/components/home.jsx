@@ -11,7 +11,7 @@ import deals3 from "../../Home icons/deals3.png";
 import Deals from "./deals";
 import Items from "./items";
 
-const URL = "https://grobite-backend.onrender.com";
+const URL = "https://grobite.onrender.com";
 
 function Home() {
   const [category, setCategory] = useState([]);

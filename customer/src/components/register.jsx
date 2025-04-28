@@ -12,7 +12,7 @@ function Register() {
     password: "",
     phone: "",
   });
-  const URL = "https://grobite-backend.onrender.com";
+  const URL = "https://grobite.onrender.com";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {

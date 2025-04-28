@@ -8,7 +8,7 @@ import CartTable from "./cartTable";
 import PaymentSuccessModal from "./paymentModal";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-const socket = io("https://grobite-backend.onrender.com");
+const socket = io("https://grobite.onrender.com");
 
 function Cart() {
   const { pathname } = useLocation();
