@@ -8,10 +8,10 @@ import CartTable from "./cartTable";
 import PaymentSuccessModal from "./paymentModal";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-const socket = io("http://127.0.0.1:8080");
+const socket = io("https://grobite-backend.onrender.com");
 
 function Cart() {
-  const URL = "http://127.0.0.1:8080/api";
+  const URL = "https://grobite-backend.onrender.com/api";
   const { pathname } = useLocation();
   const { cartItems, emptyCart } = useContext(CartContext);
   const { user } = useContext(AuthContext);

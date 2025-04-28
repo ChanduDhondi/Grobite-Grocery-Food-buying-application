@@ -11,7 +11,7 @@ function Login() {
     email: "",
     password: "",
   });
-  const URL = "http://127.0.0.1:8080/api";
+  const URL = "https://grobite-backend.onrender.com/api";
   const navigate = useNavigate();
   const [error, setError] = useState({});
   const { login } = useContext(AuthContext);

@@ -6,7 +6,7 @@ import axios from "axios";
 import Items from "./items";
 
 function Shop() {
-  const URL = "http://127.0.0.1:8080/api/";
+  const URL = "https://grobite-backend.onrender.com/api/";
   const { pathname } = useLocation();
   const [searchProduct, setSearchProduct] = useState("");
   const [isSearch, setIsSearch] = useState(false);
