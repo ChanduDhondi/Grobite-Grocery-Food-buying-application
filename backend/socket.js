@@ -5,7 +5,7 @@ function handleSocket(socket) {
 
   socket.on("registerUser", async (userId) => {
     try {
-      const orders = await Orders.find({ user: userId });
+      const orders = await Orders.find({ user: userId }).sort({ date: -1 });
       socket.emit("showOrders", orders);
     } catch (err) {
       console.log("Error fetching orders:", err.message);
@@ -28,9 +28,7 @@ function handleSocket(socket) {
         totalPrice,
         user: userId,
       });
-      const orders = await Orders.find({ user: userId })
-        .sort({ date: -1 })
-        .toArray();
+      const orders = await Orders.find({ user: userId }).sort({ date: -1 });
       socket.emit("showOrders", orders);
     } catch (err) {
       console.log("Error while creating Order", err.message);
