@@ -24,7 +24,7 @@ socket(io);
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://grobite.netlify.app/",
+    origin: "https://grobite.netlify.app",
     methods: ["GET", "PUT", "POST"],
   })
 );
