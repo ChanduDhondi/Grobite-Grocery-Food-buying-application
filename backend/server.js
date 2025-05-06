@@ -14,7 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://grobite.netlify.app/",
     methods: ["GET", "POST"],
   },
 });
@@ -22,7 +22,12 @@ socket(io);
 
 //middlewares
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://grobite.netlify.app/",
+    credentials: true,
+  })
+);
 
 //db connection
 main()
