@@ -22,7 +22,12 @@ socket(io);
 
 //middlewares
 app.use(bodyParser.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://grobite.netlify.app/",
+    methods: ["GET", "PUT", "POST"],
+  })
+);
 
 //db connection
 main()
