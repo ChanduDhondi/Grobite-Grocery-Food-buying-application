@@ -24,8 +24,9 @@ socket(io);
 app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "https://grobite.netlify.app",
+    origin: "https://grobite.netlify.app/",
     methods: ["GET", "PUT", "POST"],
+    credentials: true,
   })
 );
 
@@ -37,10 +38,7 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  await mongoose.connect(process.env.MONGODB_URL);
 }
 
 //route middleware
