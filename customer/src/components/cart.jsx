@@ -7,8 +7,9 @@ import AuthContext from "./authContext";
 import CartTable from "./cartTable";
 import PaymentSuccessModal from "./paymentModal";
 import { useNavigate } from "react-router-dom";
+import { localUrl, backendUrl } from "../utils/util";
 import { io } from "socket.io-client";
-const socket = io("https://grobite.onrender.com");
+const socket = io(backendUrl);
 
 function Cart() {
   const { pathname } = useLocation();

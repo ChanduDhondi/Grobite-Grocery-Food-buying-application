@@ -5,13 +5,14 @@ import back from "../../Home icons/back.png";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "./authContext";
+import { localUrl, backendUrl } from "../utils/util";
 
 function Login() {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  const URL = "https://grobite.onrender.com";
+  const URL = backendUrl;
   const navigate = useNavigate();
   const [error, setError] = useState({});
   const { login } = useContext(AuthContext);

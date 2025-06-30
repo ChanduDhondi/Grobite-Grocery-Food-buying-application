@@ -4,6 +4,7 @@ import { useState } from "react";
 import back from "../../Home icons/back.png";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import { localUrl, backendUrl } from "../utils/util";
 
 function Register() {
   const [data, setData] = useState({
@@ -12,7 +13,7 @@ function Register() {
     password: "",
     phone: "",
   });
-  const URL = "https://grobite.onrender.com";
+  const URL = localUrl;
   const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {

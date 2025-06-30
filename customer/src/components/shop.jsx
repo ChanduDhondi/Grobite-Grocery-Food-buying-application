@@ -4,9 +4,10 @@ import BreadCrumb from "./breadcrumb";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Items from "./items";
+import { localUrl, backendUrl } from "../utils/util";
 
 function Shop() {
-  const URL = "https://grobite.onrender.com";
+  const URL = backendUrl;
   const { pathname } = useLocation();
   const [searchProduct, setSearchProduct] = useState("");
   const [isSearch, setIsSearch] = useState(false);
@@ -15,6 +16,7 @@ function Shop() {
   const [category, setCategory] = useState([]);
   const [allItems, setAllItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -30,8 +32,11 @@ function Shop() {
       setAllItems(response.data);
     };
 
-    fetchCategory();
-    fetchItems();
+    const fetchData = async () => {
+      await Promise.all([fetchCategory(), fetchItems()]);
+      setLoading(false);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
@@ -42,6 +47,8 @@ function Shop() {
       setSelectedItems(filtered);
     }
   }, [allItems, selectedCategory]);
+
+  if (loading) return null;
 
   function handleSearch(evt) {
     let value = evt.target.value;
@@ -63,7 +70,6 @@ function Shop() {
   function handleRadio(evt) {
     setSelectedCategory(evt.target.value);
   }
-
   return (
     <>
       <div

@@ -10,12 +10,15 @@ import deals2 from "../../Home icons/deals2.png";
 import deals3 from "../../Home icons/deals3.png";
 import Deals from "./deals";
 import Items from "./items";
+import { localUrl, backendUrl } from "../utils/util";
+import Loading from "./loading";
 
-const URL = "https://grobite.onrender.com";
+const URL = backendUrl;
 
 function Home() {
   const [category, setCategory] = useState([]);
   const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCategory = async () => {
@@ -32,9 +35,14 @@ function Home() {
       }
       setItems(randomItems);
     };
-    fetchCategory();
-    fetItems();
+    const fetchData = async () => {
+      await Promise.all([fetchCategory(), fetItems()]);
+      setLoading(false);
+    };
+    fetchData();
   }, []);
+
+  if (loading) return null;
 
   return (
     <>
