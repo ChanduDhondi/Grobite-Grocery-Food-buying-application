@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Items from "./items";
 import { localUrl, backendUrl } from "../utils/util";
+import Loading from "./loading";
 
 function Shop() {
   const URL = backendUrl;
@@ -48,7 +49,7 @@ function Shop() {
     }
   }, [allItems, selectedCategory]);
 
-  if (loading) return null;
+  if (loading) return <Loading />;
 
   function handleSearch(evt) {
     let value = evt.target.value;

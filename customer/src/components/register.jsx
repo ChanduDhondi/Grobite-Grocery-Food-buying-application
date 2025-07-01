@@ -13,7 +13,7 @@ function Register() {
     password: "",
     phone: "",
   });
-  const URL = localUrl;
+  const URL = backendUrl;
   const navigate = useNavigate();
   const [error, setError] = useState({});
   function handleChange(evt) {

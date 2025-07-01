@@ -42,7 +42,7 @@ function Home() {
     fetchData();
   }, []);
 
-  if (loading) return null;
+  if (loading) return <Loading />;
 
   return (
     <>
